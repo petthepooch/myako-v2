@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Myako LMS · Learner Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <div class="app" data-theme="light">
+      <aside class="sidebar" aria-label="Primary">
+        <div class="sidebar__brand">
+          <div class="brand__logo" aria-hidden="true">🎓</div>
+          <span class="brand__name">Myako LMS</span>
+        </div>
+        <nav class="sidebar__nav">
+          <button class="nav__item nav__item--active" type="button">
+            <span aria-hidden="true">🏠</span>
+            <span>Dashboard</span>
+          </button>
+          <button class="nav__item" type="button">
+            <span aria-hidden="true">📚</span>
+            <span>Courses</span>
+          </button>
+          <button class="nav__item" type="button">
+            <span aria-hidden="true">📝</span>
+            <span>Assessments</span>
+          </button>
+          <button class="nav__item" type="button">
+            <span aria-hidden="true">💬</span>
+            <span>Community</span>
+          </button>
+          <button class="nav__item" type="button">
+            <span aria-hidden="true">⚙️</span>
+            <span>Settings</span>
+          </button>
+        </nav>
+        <div class="sidebar__footer">
+          <button class="theme-toggle" type="button" aria-label="Toggle theme">
+            <span class="theme-toggle__icon" aria-hidden="true">🌙</span>
+            <span class="theme-toggle__label">Dark mode</span>
+          </button>
+        </div>
+      </aside>
+      <div class="content">
+        <header class="topbar" aria-label="Secondary">
+          <div>
+            <p class="topbar__eyebrow">Welcome back</p>
+            <h1 class="topbar__title">Learner Dashboard</h1>
+          </div>
+          <div class="topbar__actions">
+            <label class="search" aria-label="Search">
+              <span aria-hidden="true">🔍</span>
+              <input type="search" name="search" placeholder="Search courses, mentors..." />
+            </label>
+            <button class="pill-button" type="button">+ New Goal</button>
+            <button class="icon-button" type="button" aria-label="Notifications">
+              🔔
+            </button>
+            <button class="profile" type="button">
+              <img src="https://avatars.dicebear.com/api/initials/Ada%20L.svg" alt="Learner avatar" />
+              <span class="profile__details">
+                <span class="profile__name">Ada Lovelace</span>
+                <span class="profile__role">Data Science Path</span>
+              </span>
+            </button>
+          </div>
+        </header>
+        <main class="dashboard" aria-live="polite"></main>
+      </div>
+    </div>
+    <template id="dashboard-template">
+      <section class="panel panel--wide" aria-labelledby="learning-progress">
+        <header class="panel__header">
+          <div>
+            <p class="panel__eyebrow">Monthly overview</p>
+            <h2 id="learning-progress">Learning progress</h2>
+          </div>
+          <button class="text-button" type="button">View analytics</button>
+        </header>
+        <div class="progress-summary">
+          <div class="progress-summary__item">
+            <p class="progress-summary__label">Active streak</p>
+            <p class="progress-summary__value" data-field="streak"></p>
+          </div>
+          <div class="progress-summary__item">
+            <p class="progress-summary__label">Hours this week</p>
+            <p class="progress-summary__value" data-field="weeklyHours"></p>
+          </div>
+          <div class="progress-summary__item">
+            <p class="progress-summary__label">Skills unlocked</p>
+            <p class="progress-summary__value" data-field="skills"></p>
+          </div>
+          <div class="progress-summary__item">
+            <p class="progress-summary__label">Completion</p>
+            <div class="progress-circle" data-field="completion"></div>
+          </div>
+        </div>
+        <div class="progress-list" data-list="modules" role="list"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="daily-goals">
+        <header class="panel__header">
+          <h2 id="daily-goals">Today\'s focus</h2>
+          <button class="text-button" type="button">Adjust</button>
+        </header>
+        <ul class="goal-list" data-list="goals"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="tasks">
+        <header class="panel__header">
+          <h2 id="tasks">Upcoming tasks</h2>
+          <button class="text-button" type="button">View calendar</button>
+        </header>
+        <ul class="task-list" data-list="tasks"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="calendar">
+        <header class="panel__header">
+          <h2 id="calendar">Schedule</h2>
+          <button class="text-button" type="button">Add event</button>
+        </header>
+        <div class="calendar" data-list="schedule"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="resources">
+        <header class="panel__header">
+          <h2 id="resources">Recommended resources</h2>
+          <button class="text-button" type="button">See all</button>
+        </header>
+        <ul class="resource-list" data-list="resources"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="mentors">
+        <header class="panel__header">
+          <h2 id="mentors">Community &amp; mentorship</h2>
+          <button class="text-button" type="button">Browse mentors</button>
+        </header>
+        <div class="community" data-list="community"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="achievements">
+        <header class="panel__header">
+          <h2 id="achievements">Achievements</h2>
+          <button class="text-button" type="button">View all</button>
+        </header>
+        <ul class="achievement-list" data-list="achievements"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="insights">
+        <header class="panel__header">
+          <h2 id="insights">Personalized insights</h2>
+          <button class="text-button" type="button">Improve plan</button>
+        </header>
+        <ul class="insight-list" data-list="insights"></ul>
+      </section>
+    </template>
+    <script src="./assets/app.js" type="module"></script>
+  </body>
+</html>
